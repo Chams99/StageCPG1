@@ -1,0 +1,23 @@
+@model List<StageursApp.Models.Encadreur>
+<h2>Encadreurs</h2>
+
+<form asp-action="AddEncadreur" method="post">
+    <input name="Nom" placeholder="Nom" class="form-control" required />
+    <input name="Prenom" placeholder="Prénom" class="form-control mt-1" required />
+    <input name="Email" placeholder="Email" class="form-control mt-1" required />
+    <input name="Fonction" placeholder="Fonction" class="form-control mt-1" required />
+    <input name="Telephone" placeholder="Téléphone" class="form-control mt-1" required />
+    <button class="btn btn-primary mt-2">Ajouter</button>
+</form>
+
+<table class="table mt-4">
+    <tr><th>Nom</th><th>Email</th><th>Fonction</th></tr>
+    @foreach (var e in Model)
+    {
+        <tr>
+            <td>@e?.Nom @e?.Prenom</td>
+            <td>@e?.Email</td>
+            <td>@e?.Fonction</td>
+        </tr>
+    }
+</table>

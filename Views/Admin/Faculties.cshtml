@@ -1,0 +1,13 @@
+@model List<StageursApp.Models.Faculty>
+<h2>Facultés</h2>
+<form asp-action="AddFaculty" method="post">
+    <input name="nom" placeholder="Nom faculté" class="form-control" required />
+    <button class="btn btn-primary mt-2">Ajouter</button>
+</form>
+
+<ul class="mt-3">
+    @foreach (var f in Model)
+    {
+        <li>@f?.Nom</li>
+    }
+</ul>

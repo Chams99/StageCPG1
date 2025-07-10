@@ -1,0 +1,35 @@
+@model StageursApp.Models.AdminDashboardViewModel
+
+<h2>Admin Dashboard</h2>
+
+<h3>Faculties</h3>
+<ul>
+@foreach (var f in Model.Faculties)
+{
+    <li>@f.Nom</li>
+}
+</ul>
+
+<h3>Sections</h3>
+<ul>
+@foreach (var s in Model.Sections)
+{
+    <li>@s.Nom (Faculté: @s.Faculty.Nom)</li>
+}
+</ul>
+
+<h3>Encadreurs</h3>
+<ul>
+@foreach (var e in Model.Encadreurs)
+{
+    <li>@e.Nom @e.Prenom - @e.Email</li>
+}
+</ul>
+
+<h3>Etudiants</h3>
+<ul>
+@foreach (var et in Model.Etudiants)
+{
+    <li>@et.Prenom @et.Nom – @et.Email – Section: @et.Section.Nom (@et.Section.Faculty.Nom)</li>
+}
+</ul>

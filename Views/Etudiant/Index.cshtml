@@ -1,0 +1,24 @@
+@model IEnumerable<StageursApp.Models.Etudiant>
+<h2>Liste des Stagiaires</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Encadreur</th>
+            <th>Section</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var e in Model)
+    {
+        <tr>
+            <td>@e.Prenom @e.Nom</td>
+            <td>@e.Email</td>
+            <td>@e.Encadreur.Nom @e.Encadreur.Prenom</td>
+            <td>@e.Section.Nom - @e.Section.Faculty.Nom</td>
+        </tr>
+    }
+    </tbody>
+</table>

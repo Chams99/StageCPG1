@@ -1,0 +1,12 @@
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Inscription Stagiaire</h2>
+<form method="post" asp-action="Register">
+    <input type="text" name="Nom" placeholder="Nom" class="form-control" required />
+    <input type="text" name="Prenom" placeholder="Prénom" class="form-control mt-2" required />
+    <input type="email" name="Email" placeholder="Email" class="form-control mt-2" required />
+    <input type="password" name="Password" placeholder="Mot de passe" class="form-control mt-2" required />
+    <button class="btn btn-success mt-3">S'inscrire</button>
+</form>

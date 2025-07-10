@@ -1,0 +1,27 @@
+@model List<StageursApp.Models.Section>
+@{
+    var faculties = ViewBag.Faculties as List<StageursApp.Models.Faculty>;
+}
+<h2>Sections</h2>
+
+<form asp-action="AddSection" method="post">
+    <input name="nom" placeholder="Nom section" class="form-control" required />
+    <select name="facultyId" class="form-control mt-2">
+        @foreach (var f in faculties)
+        {
+            <option value="@f.Id">@f.Nom</option>
+        }
+    </select>
+    <button class="btn btn-primary mt-2">Ajouter</button>
+</form>
+
+<table class="table mt-4">
+    <tr><th>Section</th><th>Faculté</th></tr>
+    @foreach (var s in Model)
+    {
+        <tr>
+            <td>@s?.Nom</td>
+            <td>@s?.Faculty?.Nom</td>
+        </tr>
+    }
+</table>
