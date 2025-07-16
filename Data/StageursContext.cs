@@ -12,6 +12,17 @@ public class StageursContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Fluent API if needed
+        // Configure DateTime properties to be stored as UTC
+        modelBuilder.Entity<Etudiant>()
+            .Property(e => e.StartDate)
+            .HasConversion(
+                v => v.HasValue ? DateTime.SpecifyKind(v.Value, DateTimeKind.Utc) : v,
+                v => v);
+
+        modelBuilder.Entity<Etudiant>()
+            .Property(e => e.EndDate)
+            .HasConversion(
+                v => v.HasValue ? DateTime.SpecifyKind(v.Value, DateTimeKind.Utc) : v,
+                v => v);
     }
 }

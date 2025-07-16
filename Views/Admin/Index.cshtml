@@ -1,35 +1,257 @@
 @model StageursApp.Models.AdminDashboardViewModel
 
-<h2>Admin Dashboard</h2>
-
-<h3>Faculties</h3>
-<ul>
-@foreach (var f in Model.Faculties)
+@if (!string.IsNullOrEmpty(TempData["SuccessMessage"]?.ToString()))
 {
-    <li>@f.Nom</li>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle me-2"></i>@TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
 }
-</ul>
 
-<h3>Sections</h3>
-<ul>
-@foreach (var s in Model.Sections)
-{
-    <li>@s.Nom (Faculté: @s.Faculty.Nom)</li>
-}
-</ul>
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-4 text-primary mb-3">Admin Dashboard</h1>
+        <p class="lead text-muted">Overview of all system data and statistics</p>
+    </div>
+</div>
 
-<h3>Encadreurs</h3>
-<ul>
-@foreach (var e in Model.Encadreurs)
-{
-    <li>@e.Nom @e.Prenom - @e.Email</li>
-}
-</ul>
+<div class="row">
+    <!-- Faculties Card -->
+    <div class="col-lg-6 col-md-12 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-primary text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-university me-2"></i>Faculties (@Model.Faculties.Count)
+                </h5>
+            </div>
+            <div class="card-body">
+                @if (Model.Faculties.Any())
+                {
+                    <div class="list-group list-group-flush">
+                        @foreach (var f in Model.Faculties)
+                        {
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <span class="fw-medium">@f.Nom</span>
+                                <span class="badge bg-primary rounded-pill">
+                                    @Model.Sections.Count(s => s.FacultyId == f.Id) sections
+                                </span>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted mb-0">No faculties found.</p>
+                }
+            </div>
+            <div class="card-footer">
+                <a asp-controller="Admin" asp-action="Faculties" class="btn btn-outline-primary btn-sm">
+                    Manage Faculties
+                </a>
+            </div>
+        </div>
+    </div>
 
-<h3>Etudiants</h3>
-<ul>
-@foreach (var et in Model.Etudiants)
-{
-    <li>@et.Prenom @et.Nom – @et.Email – Section: @et.Section.Nom (@et.Section.Faculty.Nom)</li>
-}
-</ul>
+    <!-- Sections Card -->
+    <div class="col-lg-6 col-md-12 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-success text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-layer-group me-2"></i>Sections (@Model.Sections.Count)
+                </h5>
+            </div>
+            <div class="card-body">
+                @if (Model.Sections.Any())
+                {
+                    <div class="list-group list-group-flush">
+                        @foreach (var s in Model.Sections)
+                        {
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="fw-medium">@s.Nom</span>
+                                    <br>
+                                    <small class="text-muted">@s.Faculty.Nom</small>
+                                </div>
+                                <span class="badge bg-success rounded-pill">
+                                    @Model.Etudiants.Count(e => e.SectionId == s.Id) students
+                                </span>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted mb-0">No sections found.</p>
+                }
+            </div>
+            <div class="card-footer">
+                <a asp-controller="Admin" asp-action="Sections" class="btn btn-outline-success btn-sm">
+                    Manage Sections
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Encadreurs Card -->
+    <div class="col-lg-6 col-md-12 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-user-tie me-2"></i>Encadreurs (@Model.Encadreurs.Count)
+                </h5>
+            </div>
+            <div class="card-body">
+                @if (Model.Encadreurs.Any())
+                {
+                    <div class="list-group list-group-flush">
+                        @foreach (var e in Model.Encadreurs)
+                        {
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="fw-medium">@e.Prenom @e.Nom</span>
+                                    <br>
+                                    <small class="text-muted">@e.Email</small>
+                                </div>
+                                <span class="badge bg-warning text-dark rounded-pill">
+                                    @Model.Etudiants.Count(et => et.EncadreurId == e.Id) students
+                                </span>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted mb-0">No encadreurs found.</p>
+                }
+            </div>
+            <div class="card-footer">
+                <a asp-controller="Admin" asp-action="Encadreurs" class="btn btn-outline-warning btn-sm">
+                    Manage Encadreurs
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Students Card -->
+    <div class="col-lg-6 col-md-12 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-info text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-user-graduate me-2"></i>Students (@Model.Etudiants.Count)
+                </h5>
+            </div>
+            <div class="card-body">
+                @if (Model.Etudiants.Any())
+                {
+                    <div class="list-group list-group-flush">
+                        @foreach (var et in Model.Etudiants.Take(5))
+                        {
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="fw-medium">@et.Prenom @et.Nom</span>
+                                    <br>
+                                    <small class="text-muted">@(et.Section?.Nom ?? "No Section") (@(et.Section?.Faculty?.Nom ?? "No Faculty"))</small>
+                                </div>
+                                <span class="badge bg-info rounded-pill">
+                                    @et.Email
+                                </span>
+                            </div>
+                        }
+                        @if (Model.Etudiants.Count > 5)
+                        {
+                            <div class="list-group-item text-center">
+                                <small class="text-muted">+@(Model.Etudiants.Count - 5) more students</small>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted mb-0">No students found.</p>
+                }
+            </div>
+            <div class="card-footer">
+                <a asp-controller="Etudiant" asp-action="Index" class="btn btn-outline-info btn-sm">
+                    View All Students
+                </a>
+                <a asp-controller="Etudiant" asp-action="Create" class="btn btn-info btn-sm ms-2">
+                    Add Student
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Badge Management -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-id-badge me-2"></i>Badge Management
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <a asp-controller="Admin" asp-action="GenerateAllBadges" class="btn btn-info w-100">
+                            <i class="fas fa-sync-alt me-2"></i>Generate All Badges
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <form asp-controller="Admin" asp-action="GenerateMissingBadges" method="post" style="display: inline;">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-warning w-100" onclick="return confirm('Generate badges for students who don\'t have one yet?')">
+                                <i class="fas fa-plus-circle me-2"></i>Generate Missing Badges
+                            </button>
+                        </form>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a asp-controller="Etudiant" asp-action="Index" class="btn btn-outline-info w-100">
+                            <i class="fas fa-list me-2"></i>View All Students
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-bolt me-2"></i>Quick Actions
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 mb-3">
+                        <a asp-controller="Etudiant" asp-action="Create" class="btn btn-primary w-100">
+                            <i class="fas fa-plus me-2"></i>Add Student
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-3">
+                        <a asp-controller="Admin" asp-action="Faculties" class="btn btn-outline-primary w-100">
+                            <i class="fas fa-university me-2"></i>Manage Faculties
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-3">
+                        <a asp-controller="Admin" asp-action="Sections" class="btn btn-outline-success w-100">
+                            <i class="fas fa-layer-group me-2"></i>Manage Sections
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-3">
+                        <a asp-controller="Admin" asp-action="Encadreurs" class="btn btn-outline-warning w-100">
+                            <i class="fas fa-user-tie me-2"></i>Manage Encadreurs
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

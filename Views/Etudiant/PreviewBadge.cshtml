@@ -1,0 +1,78 @@
+@{
+    ViewData["Title"] = "Badge Preview";
+}
+
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-4 text-primary mb-3">
+            <i class="fas fa-id-badge me-2"></i>Badge Preview
+        </h1>
+        <p class="lead text-muted">Preview and print student badge for @ViewBag.Etudiant.Prenom @ViewBag.Etudiant.Nom</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-eye me-2"></i>Badge Preview
+                </h5>
+                <div>
+                    <button onclick="window.print()" class="btn btn-light btn-sm me-2">
+                        <i class="fas fa-print me-1"></i>Print
+                    </button>
+                    <a asp-action="Details" asp-route-id="@ViewBag.Etudiant.Id" class="btn btn-outline-light btn-sm">
+                        <i class="fas fa-arrow-left me-1"></i>Back
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    @Html.Raw(ViewBag.BadgeHtml)
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-center">
+                            <a asp-action="DownloadBadge" asp-route-id="@ViewBag.Etudiant.Id" class="btn btn-info me-2">
+                                <i class="fas fa-download me-2"></i>Download PDF
+                            </a>
+                            <a asp-action="PrintBadge" asp-route-id="@ViewBag.Etudiant.Id" class="btn btn-success me-2" target="_blank">
+                                <i class="fas fa-print me-2"></i>Print PDF
+                            </a>
+                            <form asp-action="RegenerateBadge" asp-route-id="@ViewBag.Etudiant.Id" method="post" style="display: inline;">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-warning me-2" onclick="return confirm('Are you sure you want to regenerate the badge?')">
+                                    <i class="fas fa-sync-alt me-2"></i>Regenerate
+                                </button>
+                            </form>
+                            <a asp-action="Details" asp-route-id="@ViewBag.Etudiant.Id" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @@media print {
+        .card-header, .btn, .row:last-child {
+            display: none !important;
+        }
+        
+        .badge-preview {
+            border: 2px solid #000 !important;
+            background: white !important;
+            page-break-inside: avoid;
+        }
+        
+        body {
+            margin: 0;
+            padding: 20px;
+        }
+    }
+</style> 

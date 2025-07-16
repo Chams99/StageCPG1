@@ -1,56 +1,180 @@
 @model StageursApp.Models.Etudiant
 @{
-    ViewData["Title"] = "Ajouter un Stagiaire";
+    ViewData["Title"] = "Add New Student";
     var encadreurs = ViewBag.Encadreurs as List<StageursApp.Models.Encadreur>;
     var sections = ViewBag.Sections as List<StageursApp.Models.Section>;
 }
 
-<h2>@ViewData["Title"]</h2>
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-4 text-info mb-3">
+            <i class="fas fa-user-plus me-2"></i>Add New Student
+        </h1>
+        <p class="lead text-muted">Create a new student record in the system</p>
+    </div>
+</div>
 
-<form asp-action="Create" method="post">
-    <div>
-        <label>Nom</label>
-        <input asp-for="Nom" class="form-control" />
-    </div>
-    <div>
-        <label>Prénom</label>
-        <input asp-for="Prenom" class="form-control" />
-    </div>
-    <div>
-        <label>Email</label>
-        <input asp-for="Email" class="form-control" />
-    </div>
-    <div>
-        <label>Téléphone</label>
-        <input asp-for="Telephone" class="form-control" />
-    </div>
-    <div>
-        <label>Date début</label>
-        <input asp-for="StartDate" type="date" class="form-control" />
-    </div>
-    <div>
-        <label>Date fin</label>
-        <input asp-for="EndDate" type="date" class="form-control" />
-    </div>
-    <div>
-        <label>Encadreur</label>
-        <select asp-for="EncadreurId" class="form-control">
-            @foreach (var e in encadreurs)
-            {
-                <option value="@e.Id">@e.Nom @e.Prenom</option>
-            }
-        </select>
-    </div>
-    <div>
-        <label>Section</label>
-        <select asp-for="SectionId" class="form-control">
-            @foreach (var s in sections)
-            {
-                <option value="@s.Id">@s.Nom - @s.Faculty.Nom</option>
-            }
-        </select>
-    </div>
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-user-graduate me-2"></i>Student Information
+                </h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Nom" class="form-label">
+                                <i class="fas fa-user me-1"></i>Last Name
+                            </label>
+                            <input asp-for="Nom" class="form-control" placeholder="Enter last name" required />
+                            <span asp-validation-for="Nom" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Prenom" class="form-label">
+                                <i class="fas fa-user me-1"></i>First Name
+                            </label>
+                            <input asp-for="Prenom" class="form-control" placeholder="Enter first name" required />
+                            <span asp-validation-for="Prenom" class="text-danger"></span>
+                        </div>
+                    </div>
 
-    <br />
-    <button type="submit" class="btn btn-success">Ajouter</button>
-</form>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Email" class="form-label">
+                                <i class="fas fa-envelope me-1"></i>Email Address
+                            </label>
+                            <input asp-for="Email" type="email" class="form-control" placeholder="Enter email address" required />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Telephone" class="form-label">
+                                <i class="fas fa-phone me-1"></i>Phone Number
+                            </label>
+                            <input asp-for="Telephone" class="form-control" placeholder="Enter phone number" required />
+                            <span asp-validation-for="Telephone" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="StartDate" class="form-label">
+                                <i class="fas fa-calendar-plus me-1"></i>Start Date
+                            </label>
+                            <input asp-for="StartDate" type="date" class="form-control" required />
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="EndDate" class="form-label">
+                                <i class="fas fa-calendar-minus me-1"></i>End Date
+                            </label>
+                            <input asp-for="EndDate" type="date" class="form-control" required />
+                            <span asp-validation-for="EndDate" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="PhotoFile" class="form-label">
+                                <i class="fas fa-image me-1"></i>Student Photo
+                            </label>
+                            <input asp-for="PhotoFile" type="file" class="form-control" accept="image/*" />
+                            <small class="form-text text-muted">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Maximum file size: 5MB. Allowed formats: JPG, JPEG, PNG, GIF
+                            </small>
+                            <span asp-validation-for="PhotoFile" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="BadgePath" class="form-label">
+                                <i class="fas fa-id-badge me-1"></i>Badge Path
+                            </label>
+                            <input asp-for="BadgePath" class="form-control" placeholder="Enter badge path (optional)" />
+                            <span asp-validation-for="BadgePath" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="EncadreurId" class="form-label">
+                                <i class="fas fa-user-tie me-1"></i>Supervisor
+                            </label>
+                            <select asp-for="EncadreurId" class="form-select" required>
+                                <option value="">Select a supervisor</option>
+                                @foreach (var e in encadreurs)
+                                {
+                                    <option value="@e.Id">@(e.Prenom ?? "") @(e.Nom ?? "") - @(e.Fonction ?? "No Function")</option>
+                                }
+                            </select>
+                            <span asp-validation-for="EncadreurId" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="SectionId" class="form-label">
+                                <i class="fas fa-layer-group me-1"></i>Section
+                            </label>
+                            <select asp-for="SectionId" class="form-select" required>
+                                <option value="">Select a section</option>
+                                @foreach (var s in sections)
+                                {
+                                    <option value="@s.Id">@s.Nom - @(s.Faculty?.Nom ?? "No Faculty")</option>
+                                }
+                            </select>
+                            <span asp-validation-for="SectionId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between">
+                                <a asp-controller="Etudiant" asp-action="Index" class="btn btn-outline-secondary">
+                                    <i class="fas fa-arrow-left me-2"></i>Back to List
+                                </a>
+                                <button type="submit" class="btn btn-info">
+                                    <i class="fas fa-save me-2"></i>Create Student
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-info-circle me-2"></i>Quick Actions
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <a asp-controller="Etudiant" asp-action="Index" class="btn btn-outline-info w-100">
+                            <i class="fas fa-list me-2"></i>View All Students
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a asp-controller="Admin" asp-action="Index" class="btn btn-outline-primary w-100">
+                            <i class="fas fa-tachometer-alt me-2"></i>Admin Dashboard
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a asp-controller="Admin" asp-action="Encadreurs" class="btn btn-outline-warning w-100">
+                            <i class="fas fa-user-tie me-2"></i>Manage Supervisors
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a asp-controller="Admin" asp-action="Sections" class="btn btn-outline-success w-100">
+                            <i class="fas fa-layer-group me-2"></i>Manage Sections
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

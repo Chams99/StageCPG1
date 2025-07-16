@@ -116,7 +116,6 @@ C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\bin\Debug\net9.0\zh-Hant\Micro
 C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\obj\Debug\net9.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\obj\Debug\net9.0\scopedcss\bundle\StageursApp.styles.css
 C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\obj\Debug\net9.0\scopedcss\projectbundle\StageursApp.bundle.scp.css
-C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\obj\Debug\net9.0\compressed\83op23u97t-b9sayid5wm.gz
 C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\obj\Debug\net9.0\compressed\sm4zcw9gr4-61n19gt1b8.gz
 C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\obj\Debug\net9.0\compressed\o2erllb6ip-xtxxf3hu2r.gz
 C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\obj\Debug\net9.0\compressed\qdkqb6hjh6-bqjiyaj88i.gz
@@ -195,3 +194,12 @@ C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\obj\Debug\net9.0\refint\Stageu
 C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\obj\Debug\net9.0\StageursApp.pdb
 C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\obj\Debug\net9.0\StageursApp.genruntimeconfig.cache
 C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\obj\Debug\net9.0\ref\StageursApp.dll
+C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\obj\Debug\net9.0\StageursApp.sourcelink.json
+C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\obj\Debug\net9.0\compressed\83op23u97t-8ehx5pvr5f.gz
+C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\bin\Debug\net9.0\BouncyCastle.Cryptography.dll
+C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\bin\Debug\net9.0\iTextSharp.LGPLv2.Core.dll
+C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\bin\Debug\net9.0\SkiaSharp.dll
+C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\bin\Debug\net9.0\runtimes\osx\native\libSkiaSharp.dylib
+C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\bin\Debug\net9.0\runtimes\win-arm64\native\libSkiaSharp.dll
+C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\bin\Debug\net9.0\runtimes\win-x64\native\libSkiaSharp.dll
+C:\Users\Jecft\Desktop\Projects\Stage\StageursApp\bin\Debug\net9.0\runtimes\win-x86\native\libSkiaSharp.dll

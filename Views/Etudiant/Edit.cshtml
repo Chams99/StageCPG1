@@ -1,0 +1,158 @@
+@model StageursApp.Models.Etudiant
+
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-4 text-warning mb-3">
+            <i class="fas fa-edit me-2"></i>Edit Student
+        </h1>
+        <p class="lead text-muted">Update student information</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-warning text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-user-graduate me-2"></i>Edit Student Information
+                </h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="Id" />
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Nom" class="form-label">
+                                <i class="fas fa-user me-1"></i>Last Name
+                            </label>
+                            <input asp-for="Nom" class="form-control" />
+                            <span asp-validation-for="Nom" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Prenom" class="form-label">
+                                <i class="fas fa-user me-1"></i>First Name
+                            </label>
+                            <input asp-for="Prenom" class="form-control" />
+                            <span asp-validation-for="Prenom" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Email" class="form-label">
+                                <i class="fas fa-envelope me-1"></i>Email
+                            </label>
+                            <input asp-for="Email" type="email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Telephone" class="form-label">
+                                <i class="fas fa-phone me-1"></i>Phone
+                            </label>
+                            <input asp-for="Telephone" class="form-control" />
+                            <span asp-validation-for="Telephone" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="StartDate" class="form-label">
+                                <i class="fas fa-calendar-plus me-1"></i>Start Date
+                            </label>
+                            <input asp-for="StartDate" type="date" class="form-control" />
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="EndDate" class="form-label">
+                                <i class="fas fa-calendar-minus me-1"></i>End Date
+                            </label>
+                            <input asp-for="EndDate" type="date" class="form-control" />
+                            <span asp-validation-for="EndDate" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="SectionId" class="form-label">
+                                <i class="fas fa-layer-group me-1"></i>Section
+                            </label>
+                            <select asp-for="SectionId" class="form-select">
+                                <option value="">-- Select Section --</option>
+                                @foreach (var s in ViewBag.Sections)
+                                {
+                                    <option value="@s.Id">@s.Nom - @(s.Faculty?.Nom ?? "No Faculty")</option>
+                                }
+                            </select>
+                            <span asp-validation-for="SectionId" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="EncadreurId" class="form-label">
+                                <i class="fas fa-user-tie me-1"></i>Supervisor
+                            </label>
+                            <select asp-for="EncadreurId" class="form-select">
+                                <option value="">-- Select Supervisor --</option>
+                                @foreach (var e in ViewBag.Encadreurs)
+                                {
+                                    <option value="@e.Id">@(e.Prenom ?? "") @(e.Nom ?? "") - @(e.Fonction ?? "No Function")</option>
+                                }
+                            </select>
+                            <span asp-validation-for="EncadreurId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="PhotoFile" class="form-label">
+                                <i class="fas fa-image me-1"></i>Student Photo
+                            </label>
+                            @if (!string.IsNullOrEmpty(Model.PhotoPath))
+                            {
+                                <div class="mb-2">
+                                    <img src="@Model.PhotoPath" alt="Current photo" class="img-thumbnail" style="max-width: 150px; max-height: 150px;" />
+                                    <br />
+                                    <small class="text-muted">Current photo</small>
+                                </div>
+                            }
+                            <input asp-for="PhotoFile" type="file" class="form-control" accept="image/*" />
+                            <small class="form-text text-muted">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Maximum file size: 5MB. Allowed formats: JPG, JPEG, PNG, GIF
+                            </small>
+                            <span asp-validation-for="PhotoFile" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="BadgePath" class="form-label">
+                                <i class="fas fa-id-badge me-1"></i>Badge Path
+                            </label>
+                            <input asp-for="BadgePath" class="form-control" placeholder="Enter badge path (optional)" />
+                            <span asp-validation-for="BadgePath" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between">
+                                <a asp-action="Index" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left me-2"></i>Back to List
+                                </a>
+                                <button type="submit" class="btn btn-warning">
+                                    <i class="fas fa-save me-2"></i>Save Changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

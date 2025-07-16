@@ -257,6 +257,18 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.map"
     },
     {
+      "Id": "C:\\Users\\Jecft\\Desktop\\Projects\\Stage\\StageursApp\\wwwroot\\uploads\\badges\\badge_1_05076883-cace-4eae-a5c2-8466060499f0.pdf",
+      "PackagePath": "staticwebassets\\uploads\\badges\\badge_1_05076883-cace-4eae-a5c2-8466060499f0.pdf"
+    },
+    {
+      "Id": "C:\\Users\\Jecft\\Desktop\\Projects\\Stage\\StageursApp\\wwwroot\\uploads\\photos\\.gitkeep",
+      "PackagePath": "staticwebassets\\uploads\\photos\\.gitkeep"
+    },
+    {
+      "Id": "C:\\Users\\Jecft\\Desktop\\Projects\\Stage\\StageursApp\\wwwroot\\uploads\\photos\\2ac9e57d-06cb-4d2e-965a-bdd9891b715a.jpg",
+      "PackagePath": "staticwebassets\\uploads\\photos\\2ac9e57d-06cb-4d2e-965a-bdd9891b715a.jpg"
+    },
+    {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.StageursApp.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },

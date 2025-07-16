@@ -2,26 +2,137 @@
 @{
     var faculties = ViewBag.Faculties as List<StageursApp.Models.Faculty>;
 }
-<h2>Sections</h2>
 
-<form asp-action="AddSection" method="post">
-    <input name="nom" placeholder="Nom section" class="form-control" required />
-    <select name="facultyId" class="form-control mt-2">
-        @foreach (var f in faculties)
-        {
-            <option value="@f.Id">@f.Nom</option>
-        }
-    </select>
-    <button class="btn btn-primary mt-2">Ajouter</button>
-</form>
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-4 text-success mb-3">
+            <i class="fas fa-layer-group me-2"></i>Sections Management
+        </h1>
+        <p class="lead text-muted">Add and manage sections within faculties</p>
+    </div>
+</div>
 
-<table class="table mt-4">
-    <tr><th>Section</th><th>Faculté</th></tr>
-    @foreach (var s in Model)
-    {
-        <tr>
-            <td>@s?.Nom</td>
-            <td>@s?.Faculty?.Nom</td>
-        </tr>
-    }
-</table>
+<div class="row">
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-plus me-2"></i>Add New Section
+                </h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="AddSection" method="post">
+                    <div class="mb-3">
+                        <label for="nom" class="form-label">Section Name</label>
+                        <input name="nom" id="nom" placeholder="Enter section name" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="facultyId" class="form-label">Faculty</label>
+                        <select name="facultyId" id="facultyId" class="form-select" required>
+                            <option value="">Select a faculty</option>
+                            @foreach (var f in faculties)
+                            {
+                                <option value="@f.Id">@f.Nom</option>
+                            }
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">
+                        <i class="fas fa-plus me-2"></i>Add Section
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8 col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-list me-2"></i>Current Sections (@Model.Count)
+                </h5>
+            </div>
+            <div class="card-body">
+                @if (Model.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th><i class="fas fa-layer-group me-2"></i>Section</th>
+                                    <th><i class="fas fa-university me-2"></i>Faculty</th>
+                                    <th><i class="fas fa-users me-2"></i>Students</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var s in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <i class="fas fa-layer-group text-success me-2"></i>
+                                            <span class="fw-medium">@s?.Nom</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-primary rounded-pill">
+                                                @s?.Faculty?.Nom
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-info rounded-pill">
+                                                <i class="fas fa-user-graduate me-1"></i>
+                                                <!-- Placeholder for student count -->
+                                                0 students
+                                            </span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center py-4">
+                        <i class="fas fa-layer-group text-muted" style="font-size: 3rem;"></i>
+                        <p class="text-muted mt-3">No sections found. Add your first section to get started.</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-info-circle me-2"></i>Quick Actions
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <a asp-controller="Admin" asp-action="Index" class="btn btn-outline-primary w-100">
+                            <i class="fas fa-tachometer-alt me-2"></i>Back to Dashboard
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a asp-controller="Admin" asp-action="Faculties" class="btn btn-outline-primary w-100">
+                            <i class="fas fa-university me-2"></i>Manage Faculties
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a asp-controller="Admin" asp-action="Encadreurs" class="btn btn-outline-warning w-100">
+                            <i class="fas fa-user-tie me-2"></i>Manage Encadreurs
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a asp-controller="Etudiant" asp-action="Create" class="btn btn-outline-success w-100">
+                            <i class="fas fa-user-plus me-2"></i>Add Student
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

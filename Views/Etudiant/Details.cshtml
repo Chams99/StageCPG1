@@ -1,0 +1,227 @@
+@model StageursApp.Models.Etudiant
+
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-4 text-primary mb-3">
+            <i class="fas fa-user-graduate me-2"></i>Student Details
+        </h1>
+        <p class="lead text-muted">View complete student information</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-info-circle me-2"></i>Student Information
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 text-center mb-3">
+                        @if (!string.IsNullOrEmpty(Model.PhotoPath))
+                        {
+                            <img src="@Model.PhotoPath" alt="Student photo" class="img-fluid rounded-circle shadow" style="max-width: 200px; max-height: 200px; object-fit: cover;" />
+                        }
+                        else
+                        {
+                            <div class="bg-light rounded-circle d-flex align-items-center justify-content-center mx-auto" style="width: 200px; height: 200px;">
+                                <i class="fas fa-user-graduate text-muted" style="font-size: 4rem;"></i>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-9">
+                        <h6 class="text-muted mb-3">
+                            <i class="fas fa-user me-2"></i>Personal Information
+                        </h6>
+                        <dl class="row">
+                            <dt class="col-sm-4">Full Name:</dt>
+                            <dd class="col-sm-8">
+                                <span class="fw-medium">@Model.Prenom @Model.Nom</span>
+                            </dd>
+
+                            <dt class="col-sm-4">Email:</dt>
+                            <dd class="col-sm-8">
+                                <a href="mailto:@Model.Email" class="text-decoration-none">
+                                    <i class="fas fa-envelope text-primary me-1"></i>
+                                    @Model.Email
+                                </a>
+                            </dd>
+
+                            <dt class="col-sm-4">Phone:</dt>
+                            <dd class="col-sm-8">
+                                <i class="fas fa-phone text-success me-1"></i>
+                                @Model.Telephone
+                            </dd>
+
+                            <dt class="col-sm-4">Start Date:</dt>
+                            <dd class="col-sm-8">
+                                <i class="fas fa-calendar-plus text-info me-1"></i>
+                                @(Model.StartDate?.ToString("MMM dd, yyyy") ?? "Not set")
+                            </dd>
+
+                            <dt class="col-sm-4">End Date:</dt>
+                            <dd class="col-sm-8">
+                                <i class="fas fa-calendar-minus text-warning me-1"></i>
+                                @(Model.EndDate?.ToString("MMM dd, yyyy") ?? "Not set")
+                            </dd>
+                        </dl>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h6 class="text-muted mb-3">
+                            <i class="fas fa-university me-2"></i>Academic Information
+                        </h6>
+                        <dl class="row">
+                            <dt class="col-sm-4">Supervisor:</dt>
+                            <dd class="col-sm-8">
+                                <span class="badge bg-warning text-dark rounded-pill">
+                                    <i class="fas fa-user-tie me-1"></i>
+                                    @(Model.Encadreur != null ? $"{Model.Encadreur.Prenom} {Model.Encadreur.Nom}" : "Not assigned")
+                                </span>
+                            </dd>
+
+                            <dt class="col-sm-4">Section:</dt>
+                            <dd class="col-sm-8">
+                                <span class="badge bg-success rounded-pill">
+                                    @(Model.Section?.Nom ?? "Not assigned")
+                                </span>
+                            </dd>
+
+                            <dt class="col-sm-4">Faculty:</dt>
+                            <dd class="col-sm-8">
+                                <span class="badge bg-primary rounded-pill">
+                                    @(Model.Section?.Faculty?.Nom ?? "Not assigned")
+                                </span>
+                            </dd>
+
+                            <dt class="col-sm-4">Badge Status:</dt>
+                            <dd class="col-sm-8">
+                                @if (!string.IsNullOrEmpty(Model.BadgePath))
+                                {
+                                    <span class="badge bg-success rounded-pill">
+                                        <i class="fas fa-check-circle me-1"></i>Generated
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark rounded-pill">
+                                        <i class="fas fa-exclamation-triangle me-1"></i>Not Generated
+                                    </span>
+                                }
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+
+                @if (Model.StartDate.HasValue && Model.EndDate.HasValue)
+                {
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <h6 class="text-muted mb-3">
+                                <i class="fas fa-clock me-2"></i>Internship Duration
+                            </h6>
+                            <div class="progress mb-3" style="height: 25px;">
+                                @{
+                                    var totalDays = (Model.EndDate.Value - Model.StartDate.Value).Days;
+                                    var daysElapsed = (DateTime.Now - Model.StartDate.Value).Days;
+                                    var progressPercentage = Math.Min(Math.Max((double)daysElapsed / totalDays * 100, 0), 100);
+                                }
+                                <div class="progress-bar bg-info" role="progressbar" 
+                                     style="width: @(progressPercentage)%" 
+                                     aria-valuenow="@(progressPercentage)" 
+                                     aria-valuemin="0" 
+                                     aria-valuemax="100">
+                                    @(Math.Round(progressPercentage, 1))%
+                                </div>
+                            </div>
+                            <small class="text-muted">
+                                <i class="fas fa-calendar me-1"></i>
+                                @totalDays days total • @daysElapsed days elapsed
+                            </small>
+                        </div>
+                    </div>
+                }
+
+                @if (!string.IsNullOrEmpty(TempData["SuccessMessage"]?.ToString()))
+                {
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fas fa-check-circle me-2"></i>@TempData["SuccessMessage"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                }
+
+                @if (!string.IsNullOrEmpty(TempData["ErrorMessage"]?.ToString()))
+                {
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>@TempData["ErrorMessage"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                }
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header bg-info text-white">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-id-badge me-2"></i>Badge Actions
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-2 mb-3">
+                                        <a asp-action="PreviewBadge" asp-route-id="@Model.Id" class="btn btn-primary w-100">
+                                            <i class="fas fa-eye me-2"></i>Preview Badge
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <a asp-action="DownloadBadge" asp-route-id="@Model.Id" class="btn btn-info w-100">
+                                            <i class="fas fa-download me-2"></i>Download Badge
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <a asp-action="PrintBadge" asp-route-id="@Model.Id" class="btn btn-success w-100" target="_blank">
+                                            <i class="fas fa-print me-2"></i>Print Badge
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <form asp-action="RegenerateBadge" asp-route-id="@Model.Id" method="post" style="display: inline;">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn btn-warning w-100" onclick="return confirm('Are you sure you want to regenerate the badge?')">
+                                                <i class="fas fa-sync-alt me-2"></i>Regenerate Badge
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <a asp-action="Index" class="btn btn-secondary w-100">
+                                            <i class="fas fa-arrow-left me-2"></i>Back to List
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Back to List
+                            </a>
+                            <div>
+                                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning me-2">
+                                    <i class="fas fa-edit me-2"></i>Edit
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+                                    <i class="fas fa-trash me-2"></i>Delete
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
