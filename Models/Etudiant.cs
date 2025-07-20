@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc;
 
 namespace StageursApp.Models;
 
@@ -43,5 +44,12 @@ public class Etudiant
     public int? EncadreurId { get; set; }
     public Encadreur? Encadreur { get; set; }
     
+    [HiddenInput(DisplayValue = false)]
     public string? BadgePath { get; set; }
+    
+    [Required(ErrorMessage = "National ID card number is required")]
+    [StringLength(8, MinimumLength = 8, ErrorMessage = "National ID card number must be exactly 8 digits")]
+    [RegularExpression(@"^\d{8}$", ErrorMessage = "National ID card number must be exactly 8 digits")]
+    [Display(Name = "National ID Card Number")]
+    public string IdentificationCardNumber { get; set; }
 }

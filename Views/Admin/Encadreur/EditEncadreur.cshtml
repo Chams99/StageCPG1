@@ -1,0 +1,86 @@
+@model StageursApp.Models.Encadreur
+
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-4 text-warning mb-3">
+            <i class="fas fa-edit me-2"></i>Edit Encadreur
+        </h1>
+        <p class="lead text-muted">Update supervisor information</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-user-tie me-2"></i>Edit Encadreur Information
+                </h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="EditEncadreur" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Nom" class="form-label">
+                                <i class="fas fa-user me-1"></i>Last Name
+                            </label>
+                            <input asp-for="Nom" class="form-control" placeholder="Enter last name" required />
+                            <span asp-validation-for="Nom" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Prenom" class="form-label">
+                                <i class="fas fa-user me-1"></i>First Name
+                            </label>
+                            <input asp-for="Prenom" class="form-control" placeholder="Enter first name" required />
+                            <span asp-validation-for="Prenom" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label">
+                            <i class="fas fa-envelope me-1"></i>Email
+                        </label>
+                        <input asp-for="Email" type="email" class="form-control" placeholder="Enter email address" required />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Fonction" class="form-label">
+                            <i class="fas fa-briefcase me-1"></i>Function/Position
+                        </label>
+                        <input asp-for="Fonction" class="form-control" placeholder="Enter function or position" required />
+                        <span asp-validation-for="Fonction" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Telephone" class="form-label">
+                            <i class="fas fa-phone me-1"></i>Phone Number
+                        </label>
+                        <input asp-for="Telephone" class="form-control" placeholder="Enter phone number" required />
+                        <span asp-validation-for="Telephone" class="text-danger"></span>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between">
+                                <a asp-action="Encadreurs" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left me-2"></i>Back to List
+                                </a>
+                                <button type="submit" class="btn btn-warning">
+                                    <i class="fas fa-save me-2"></i>Save Changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

@@ -13,36 +13,39 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
-            <div class="card-header bg-success text-white">
-                <h5 class="card-title mb-0">
-                    <i class="fas fa-plus me-2"></i>Add New Section
-                </h5>
-            </div>
-            <div class="card-body">
-                <form asp-action="AddSection" method="post">
-                    <div class="mb-3">
-                        <label for="nom" class="form-label">Section Name</label>
-                        <input name="nom" id="nom" placeholder="Enter section name" class="form-control" required />
-                    </div>
-                    <div class="mb-3">
-                        <label for="facultyId" class="form-label">Faculty</label>
-                        <select name="facultyId" id="facultyId" class="form-select" required>
-                            <option value="">Select a faculty</option>
-                            @foreach (var f in faculties)
-                            {
-                                <option value="@f.Id">@f.Nom</option>
-                            }
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-success w-100">
-                        <i class="fas fa-plus me-2"></i>Add Section
-                    </button>
-                </form>
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-plus me-2"></i>Add New Section
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="AddSection" method="post">
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">Section Name</label>
+                            <input name="nom" id="nom" placeholder="Enter section name" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="facultyId" class="form-label">Faculty</label>
+                            <select name="facultyId" id="facultyId" class="form-select" required>
+                                <option value="">Select a faculty</option>
+                                @foreach (var f in faculties)
+                                {
+                                    <option value="@f.Id">@f.Nom</option>
+                                }
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="fas fa-plus me-2"></i>Add Section
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    }
 
     <div class="col-lg-8 col-md-6">
         <div class="card">
@@ -61,6 +64,10 @@
                                     <th><i class="fas fa-layer-group me-2"></i>Section</th>
                                     <th><i class="fas fa-university me-2"></i>Faculty</th>
                                     <th><i class="fas fa-users me-2"></i>Students</th>
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                    {
+                                        <th><i class="fas fa-cogs me-2"></i>Actions</th>
+                                    }
                                 </tr>
                             </thead>
                             <tbody>
@@ -83,6 +90,17 @@
                                                 0 students
                                             </span>
                                         </td>
+                                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                        {
+                                            <td>
+                                                <a asp-action="EditSection" asp-route-id="@s.Id" class="btn btn-sm btn-outline-primary me-1">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a asp-action="DeleteSection" asp-route-id="@s.Id" class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        }
                                     </tr>
                                 }
                             </tbody>
@@ -93,7 +111,7 @@
                 {
                     <div class="text-center py-4">
                         <i class="fas fa-layer-group text-muted" style="font-size: 3rem;"></i>
-                        <p class="text-muted mt-3">No sections found. Add your first section to get started.</p>
+                        <p class="text-muted mt-3">No sections found. @if (User.Identity.IsAuthenticated && User.IsInRole("Admin")) { <text>Add your first section to get started.</text> } else { <text>Contact an administrator to add sections.</text> }</p>
                     </div>
                 }
             </div>
@@ -126,11 +144,14 @@
                             <i class="fas fa-user-tie me-2"></i>Manage Encadreurs
                         </a>
                     </div>
-                    <div class="col-md-3 mb-3">
-                        <a asp-controller="Etudiant" asp-action="Create" class="btn btn-outline-success w-100">
-                            <i class="fas fa-user-plus me-2"></i>Add Student
-                        </a>
-                    </div>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <div class="col-md-3 mb-3">
+                            <a asp-controller="Etudiant" asp-action="Create" class="btn btn-outline-success w-100">
+                                <i class="fas fa-user-plus me-2"></i>Add Student
+                            </a>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

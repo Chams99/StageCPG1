@@ -1,0 +1,52 @@
+@model StageursApp.Models.Faculty
+
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-4 text-primary mb-3">
+            <i class="fas fa-edit me-2"></i>Edit Faculty
+        </h1>
+        <p class="lead text-muted">Update faculty information</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-university me-2"></i>Edit Faculty Information
+                </h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="EditFaculty" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    
+                    <div class="mb-3">
+                        <label asp-for="Nom" class="form-label">
+                            <i class="fas fa-university me-1"></i>Faculty Name
+                        </label>
+                        <input asp-for="Nom" class="form-control" placeholder="Enter faculty name" required />
+                        <span asp-validation-for="Nom" class="text-danger"></span>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between">
+                                <a asp-action="Faculties" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left me-2"></i>Back to List
+                                </a>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save me-2"></i>Save Changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

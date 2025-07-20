@@ -1,0 +1,103 @@
+@model StageursApp.Models.Encadreur
+
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-4 text-danger mb-3">
+            <i class="fas fa-trash me-2"></i>Delete Encadreur
+        </h1>
+        <p class="lead text-muted">Are you sure you want to delete this supervisor?</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Confirm Deletion
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong>Warning:</strong> This action cannot be undone. The supervisor will be permanently removed from the system.
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="text-muted mb-3">
+                            <i class="fas fa-user-tie me-2"></i>Supervisor Information
+                        </h6>
+                        <dl class="row">
+                            <dt class="col-sm-4">Name:</dt>
+                            <dd class="col-sm-8">
+                                <span class="badge bg-warning text-dark rounded-pill">
+                                    <i class="fas fa-user-tie me-1"></i>
+                                    @Model.Prenom @Model.Nom
+                                </span>
+                            </dd>
+
+                            <dt class="col-sm-4">Supervisor ID:</dt>
+                            <dd class="col-sm-8">
+                                <span class="badge bg-secondary rounded-pill">
+                                    <i class="fas fa-hashtag me-1"></i>
+                                    @Model.Id
+                                </span>
+                            </dd>
+
+                            <dt class="col-sm-4">Email:</dt>
+                            <dd class="col-sm-8">
+                                <a href="mailto:@Model.Email" class="text-decoration-none">
+                                    <i class="fas fa-envelope text-primary me-1"></i>
+                                    @Model.Email
+                                </a>
+                            </dd>
+
+                            <dt class="col-sm-4">Function:</dt>
+                            <dd class="col-sm-8">
+                                <span class="badge bg-info rounded-pill">
+                                    <i class="fas fa-briefcase me-1"></i>
+                                    @Model.Fonction
+                                </span>
+                            </dd>
+
+                            <dt class="col-sm-4">Phone:</dt>
+                            <dd class="col-sm-8">
+                                <a href="tel:@Model.Telephone" class="text-decoration-none">
+                                    <i class="fas fa-phone text-success me-1"></i>
+                                    @Model.Telephone
+                                </a>
+                            </dd>
+                        </dl>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h6 class="text-muted mb-3">
+                            <i class="fas fa-info-circle me-2"></i>Impact Information
+                        </h6>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Note:</strong> Deleting this supervisor will also affect all students assigned to them.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Encadreurs" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Cancel
+                            </a>
+                            <form asp-action="DeleteEncadreur" method="post" style="display: inline;">
+                                <input type="hidden" asp-for="Id" />
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fas fa-trash me-2"></i>Delete Supervisor
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

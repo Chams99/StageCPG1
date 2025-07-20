@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using StageursApp.Data;
 using StageursApp.Models;
@@ -21,6 +22,7 @@ namespace StageursApp.Controllers
         public IActionResult Faculties() => View(_context.Faculties.ToList());
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddFaculty(string nom)
         {
             if (!string.IsNullOrEmpty(nom))
@@ -39,6 +41,7 @@ namespace StageursApp.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddSection(string nom, int facultyId)
         {
             if (!string.IsNullOrEmpty(nom))
@@ -53,6 +56,7 @@ namespace StageursApp.Controllers
         public IActionResult Encadreurs() => View(_context.Encadreurs.ToList());
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddEncadreur(Encadreur e)
         {
             if (ModelState.IsValid)
@@ -64,6 +68,7 @@ namespace StageursApp.Controllers
         }
 
         // GET: Admin/EditEncadreur/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditEncadreur(int? id)
         {
             if (id == null)
@@ -77,12 +82,13 @@ namespace StageursApp.Controllers
                 return NotFound();
             }
 
-            return View(encadreur);
+            return View("Encadreur/EditEncadreur", encadreur);
         }
 
         // POST: Admin/EditEncadreur/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditEncadreur(int id, Encadreur encadreur)
         {
             if (id != encadreur.Id)
@@ -110,10 +116,11 @@ namespace StageursApp.Controllers
                 }
                 return RedirectToAction(nameof(Encadreurs));
             }
-            return View(encadreur);
+            return View("Encadreur/EditEncadreur", encadreur);
         }
 
         // GET: Admin/DeleteEncadreur/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteEncadreur(int? id)
         {
             if (id == null)
@@ -127,12 +134,13 @@ namespace StageursApp.Controllers
                 return NotFound();
             }
 
-            return View(encadreur);
+            return View("Encadreur/DeleteEncadreur", encadreur);
         }
 
         // POST: Admin/DeleteEncadreur/5
         [HttpPost, ActionName("DeleteEncadreur")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteEncadreurConfirmed(int id)
         {
             var encadreur = await _context.Encadreurs.FindAsync(id);
@@ -146,6 +154,7 @@ namespace StageursApp.Controllers
         }
 
         // GET: Admin/EditFaculty/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditFaculty(int? id)
         {
             if (id == null)
@@ -159,12 +168,13 @@ namespace StageursApp.Controllers
                 return NotFound();
             }
 
-            return View(faculty);
+            return View("Faculty/EditFaculty", faculty);
         }
 
         // POST: Admin/EditFaculty/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditFaculty(int id, Faculty faculty)
         {
             if (id != faculty.Id)
@@ -192,10 +202,11 @@ namespace StageursApp.Controllers
                 }
                 return RedirectToAction(nameof(Faculties));
             }
-            return View(faculty);
+            return View("Faculty/EditFaculty", faculty);
         }
 
         // GET: Admin/DeleteFaculty/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteFaculty(int? id)
         {
             if (id == null)
@@ -209,12 +220,13 @@ namespace StageursApp.Controllers
                 return NotFound();
             }
 
-            return View(faculty);
+            return View("Faculty/DeleteFaculty", faculty);
         }
 
         // POST: Admin/DeleteFaculty/5
         [HttpPost, ActionName("DeleteFaculty")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteFacultyConfirmed(int id)
         {
             var faculty = await _context.Faculties.FindAsync(id);
@@ -228,6 +240,7 @@ namespace StageursApp.Controllers
         }
 
         // GET: Admin/EditSection/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditSection(int? id)
         {
             if (id == null)
@@ -242,12 +255,13 @@ namespace StageursApp.Controllers
             }
 
             ViewBag.Faculties = _context.Faculties.ToList();
-            return View(section);
+            return View("Section/EditSection", section);
         }
 
         // POST: Admin/EditSection/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditSection(int id, Section section)
         {
             if (id != section.Id)
@@ -277,10 +291,11 @@ namespace StageursApp.Controllers
             }
 
             ViewBag.Faculties = _context.Faculties.ToList();
-            return View(section);
+            return View("Section/EditSection", section);
         }
 
         // GET: Admin/DeleteSection/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteSection(int? id)
         {
             if (id == null)
@@ -294,12 +309,13 @@ namespace StageursApp.Controllers
                 return NotFound();
             }
 
-            return View(section);
+            return View("Section/DeleteSection", section);
         }
 
         // POST: Admin/DeleteSection/5
         [HttpPost, ActionName("DeleteSection")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteSectionConfirmed(int id)
         {
             var section = await _context.Sections.FindAsync(id);
@@ -390,6 +406,7 @@ namespace StageursApp.Controllers
         // POST: Admin/GenerateMissingBadges
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GenerateMissingBadges()
         {
             var studentsWithoutBadges = await _context.Etudiants

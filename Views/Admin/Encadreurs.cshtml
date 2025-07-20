@@ -10,44 +10,47 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
-            <div class="card-header bg-warning text-dark">
-                <h5 class="card-title mb-0">
-                    <i class="fas fa-plus me-2"></i>Add New Encadreur
-                </h5>
-            </div>
-            <div class="card-body">
-                <form asp-action="AddEncadreur" method="post">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="Nom" class="form-label">Last Name</label>
-                            <input name="Nom" id="Nom" placeholder="Enter last name" class="form-control" required />
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-plus me-2"></i>Add New Encadreur
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="AddEncadreur" method="post">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="Nom" class="form-label">Last Name</label>
+                                <input name="Nom" id="Nom" placeholder="Enter last name" class="form-control" required />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="Prenom" class="form-label">First Name</label>
+                                <input name="Prenom" id="Prenom" placeholder="Enter first name" class="form-control" required />
+                            </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="Prenom" class="form-label">First Name</label>
-                            <input name="Prenom" id="Prenom" placeholder="Enter first name" class="form-control" required />
+                        <div class="mb-3">
+                            <label for="Email" class="form-label">Email</label>
+                            <input name="Email" id="Email" type="email" placeholder="Enter email address" class="form-control" required />
                         </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="Email" class="form-label">Email</label>
-                        <input name="Email" id="Email" type="email" placeholder="Enter email address" class="form-control" required />
-                    </div>
-                    <div class="mb-3">
-                        <label for="Fonction" class="form-label">Function/Position</label>
-                        <input name="Fonction" id="Fonction" placeholder="Enter function or position" class="form-control" required />
-                    </div>
-                    <div class="mb-3">
-                        <label for="Telephone" class="form-label">Phone Number</label>
-                        <input name="Telephone" id="Telephone" placeholder="Enter phone number" class="form-control" required />
-                    </div>
-                    <button type="submit" class="btn btn-warning w-100">
-                        <i class="fas fa-plus me-2"></i>Add Encadreur
-                    </button>
-                </form>
+                        <div class="mb-3">
+                            <label for="Fonction" class="form-label">Function/Position</label>
+                            <input name="Fonction" id="Fonction" placeholder="Enter function or position" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Telephone" class="form-label">Phone Number</label>
+                            <input name="Telephone" id="Telephone" placeholder="Enter phone number" class="form-control" required />
+                        </div>
+                        <button type="submit" class="btn btn-warning w-100">
+                            <i class="fas fa-plus me-2"></i>Add Encadreur
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    }
 
     <div class="col-lg-8 col-md-6">
         <div class="card">
@@ -67,6 +70,10 @@
                                     <th><i class="fas fa-envelope me-2"></i>Email</th>
                                     <th><i class="fas fa-briefcase me-2"></i>Function</th>
                                     <th><i class="fas fa-phone me-2"></i>Phone</th>
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                    {
+                                        <th><i class="fas fa-cogs me-2"></i>Actions</th>
+                                    }
                                 </tr>
                             </thead>
                             <tbody>
@@ -94,6 +101,17 @@
                                                 @e?.Telephone
                                             </a>
                                         </td>
+                                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                        {
+                                            <td>
+                                                <a asp-action="EditEncadreur" asp-route-id="@e.Id" class="btn btn-sm btn-outline-primary me-1">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a asp-action="DeleteEncadreur" asp-route-id="@e.Id" class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        }
                                     </tr>
                                 }
                             </tbody>
@@ -104,15 +122,13 @@
                 {
                     <div class="text-center py-4">
                         <i class="fas fa-user-tie text-muted" style="font-size: 3rem;"></i>
-                        <p class="text-muted mt-3">No encadreurs found. Add your first encadreur to get started.</p>
+                        <p class="text-muted mt-3">No encadreurs found. @if (User.Identity.IsAuthenticated && User.IsInRole("Admin")) { <text>Add your first encadreur to get started.</text> } else { <text>Contact an administrator to add encadreurs.</text> }</p>
                     </div>
                 }
             </div>
         </div>
     </div>
 </div>
-
-<div class="row mt-4">
     <div class="col-12">
         <div class="card">
             <div class="card-header bg-info text-white">
@@ -137,11 +153,14 @@
                             <i class="fas fa-layer-group me-2"></i>Manage Sections
                         </a>
                     </div>
-                    <div class="col-md-3 mb-3">
-                        <a asp-controller="Etudiant" asp-action="Create" class="btn btn-outline-warning w-100">
-                            <i class="fas fa-user-plus me-2"></i>Add Student
-                        </a>
-                    </div>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <div class="col-md-3 mb-3">
+                            <a asp-controller="Etudiant" asp-action="Create" class="btn btn-outline-warning w-100">
+                                <i class="fas fa-user-plus me-2"></i>Add Student
+                            </a>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

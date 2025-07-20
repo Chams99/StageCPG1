@@ -43,6 +43,20 @@
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
+                            <label asp-for="IdentificationCardNumber" class="form-label">
+                                <i class="fas fa-id-card me-1"></i>National ID Card Number
+                            </label>
+                            <input asp-for="IdentificationCardNumber" class="form-control" placeholder="Enter your 8-digit national ID" maxlength="8" required />
+                            <small class="form-text text-muted">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Must be exactly 8 digits from your official national ID card
+                            </small>
+                            <span asp-validation-for="IdentificationCardNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
                             <label asp-for="Email" class="form-label">
                                 <i class="fas fa-envelope me-1"></i>Email Address
                             </label>
@@ -83,17 +97,11 @@
                             <input asp-for="PhotoFile" type="file" class="form-control" accept="image/*" />
                             <small class="form-text text-muted">
                                 <i class="fas fa-info-circle me-1"></i>
-                                Maximum file size: 5MB. Allowed formats: JPG, JPEG, PNG, GIF
+                                Maximum file size: 1MB. Allowed formats: JPG, JPEG, PNG, GIF
                             </small>
                             <span asp-validation-for="PhotoFile" class="text-danger"></span>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label asp-for="BadgePath" class="form-label">
-                                <i class="fas fa-id-badge me-1"></i>Badge Path
-                            </label>
-                            <input asp-for="BadgePath" class="form-control" placeholder="Enter badge path (optional)" />
-                            <span asp-validation-for="BadgePath" class="text-danger"></span>
-                        </div>
+
                     </div>
 
                     <div class="row">

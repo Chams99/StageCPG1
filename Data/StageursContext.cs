@@ -9,6 +9,7 @@ public class StageursContext : DbContext
     public DbSet<Encadreur> Encadreurs { get; set; }
     public DbSet<Section> Sections { get; set; }
     public DbSet<Faculty> Faculties { get; set; }
+    public DbSet<Admin> Admins { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

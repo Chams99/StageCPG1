@@ -1,0 +1,66 @@
+@model StageursApp.Models.Section
+
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-4 text-success mb-3">
+            <i class="fas fa-edit me-2"></i>Edit Section
+        </h1>
+        <p class="lead text-muted">Update section information</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-layer-group me-2"></i>Edit Section Information
+                </h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="EditSection" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    
+                    <div class="mb-3">
+                        <label asp-for="Nom" class="form-label">
+                            <i class="fas fa-layer-group me-1"></i>Section Name
+                        </label>
+                        <input asp-for="Nom" class="form-control" placeholder="Enter section name" required />
+                        <span asp-validation-for="Nom" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="FacultyId" class="form-label">
+                            <i class="fas fa-university me-1"></i>Faculty
+                        </label>
+                        <select asp-for="FacultyId" class="form-select" required>
+                            <option value="">-- Select Faculty --</option>
+                            @foreach (var faculty in ViewBag.Faculties)
+                            {
+                                <option value="@faculty.Id">@faculty.Nom</option>
+                            }
+                        </select>
+                        <span asp-validation-for="FacultyId" class="text-danger"></span>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between">
+                                <a asp-action="Sections" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left me-2"></i>Back to List
+                                </a>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-save me-2"></i>Save Changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

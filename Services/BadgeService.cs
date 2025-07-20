@@ -102,7 +102,8 @@ namespace StageursApp.Services
             var labelFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.Black);
             var valueFont = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.Black);
 
-            AddTableRow(table, "Full Name:", $"{etudiant.Prenom} {etudiant.Nom}", labelFont, valueFont);
+            AddTableRow(table, "Full Name:", $"{etudiant.Prenom ?? ""} {etudiant.Nom ?? ""}".Trim(), labelFont, valueFont);
+            AddTableRow(table, "National ID:", etudiant.IdentificationCardNumber ?? "N/A", labelFont, valueFont);
             AddTableRow(table, "Email:", etudiant.Email ?? "N/A", labelFont, valueFont);
             AddTableRow(table, "Phone:", etudiant.Telephone ?? "N/A", labelFont, valueFont);
             AddTableRow(table, "Supervisor:", etudiant.Encadreur != null ? $"{etudiant.Encadreur.Prenom} {etudiant.Encadreur.Nom}" : "Not assigned", labelFont, valueFont);
@@ -243,7 +244,11 @@ namespace StageursApp.Services
                     </div>
                     
                     <div style='margin-bottom: 15px;'>
-                        <strong style='color: #495057;'>Name:</strong> {etudiant.Prenom} {etudiant.Nom}
+                        <strong style='color: #495057;'>Name:</strong> {etudiant.Prenom ?? ""} {etudiant.Nom ?? ""}
+                    </div>
+                    
+                    <div style='margin-bottom: 15px;'>
+                        <strong style='color: #495057;'>National ID:</strong> {etudiant.IdentificationCardNumber ?? "N/A"}
                     </div>
                     
                     <div style='margin-bottom: 15px;'>

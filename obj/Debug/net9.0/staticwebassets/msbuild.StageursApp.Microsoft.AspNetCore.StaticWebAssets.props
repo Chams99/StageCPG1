@@ -1,5 +1,23 @@
 ﻿<Project>
   <ItemGroup>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\buttons.css'))">
+      <SourceType>Package</SourceType>
+      <SourceId>StageursApp</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/StageursApp</BasePath>
+      <RelativePath>css/buttons.css</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>dwovrl93nv</Fingerprint>
+      <Integrity>M7HAIno5K0mFfRKtJtPa9RLxOqHLfUPazv+SMKE+bcU=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\buttons.css'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))">
       <SourceType>Package</SourceType>
       <SourceId>StageursApp</SourceId>
@@ -12,8 +30,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>8ehx5pvr5f</Fingerprint>
-      <Integrity>UK+mk+yqimojkEwdhY8CC/H/+0mRmFpM9kVJRd+BZ0M=</Integrity>
+      <Fingerprint>af8rw3leqf</Fingerprint>
+      <Integrity>Zj+x+3c8NLoRvZOx7Ua2hq076C5HhyQ72Ku7/er4eMg=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</OriginalItemSpec>
@@ -48,8 +66,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>xtxxf3hu2r</Fingerprint>
-      <Integrity>hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo=</Integrity>
+      <Fingerprint>1qnc6z9y5o</Fingerprint>
+      <Integrity>GUWIdgwyyWsqxyyx1zWVPYWWxtiRbREvwsV9mKW3Y7U=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))</OriginalItemSpec>
@@ -1152,23 +1170,59 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\StageursApp.60rq5u2h94.bundle.scp.css'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\badges\badge_1_05076883-cace-4eae-a5c2-8466060499f0.pdf'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\badges\badge_7_545d8f77-3299-4f64-8075-d2776cf059be.pdf'))">
       <SourceType>Package</SourceType>
       <SourceId>StageursApp</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/StageursApp</BasePath>
-      <RelativePath>uploads/badges/badge_1_05076883-cace-4eae-a5c2-8466060499f0.pdf</RelativePath>
+      <RelativePath>uploads/badges/badge_7_545d8f77-3299-4f64-8075-d2776cf059be.pdf</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>12zbtade0f</Fingerprint>
-      <Integrity>OXvx144+7rQtBVQI5NyQ6G4p/GF57r+g62aAmWRIiDQ=</Integrity>
+      <Fingerprint>scu0d0mdc7</Fingerprint>
+      <Integrity>VJkFgjZwzzLGF3iY+LB3tu1cGNVKIV6U0uwj/mcmxNM=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\badges\badge_1_05076883-cace-4eae-a5c2-8466060499f0.pdf'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\badges\badge_7_545d8f77-3299-4f64-8075-d2776cf059be.pdf'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\badges\badge_8_b5894301-7de9-43ce-9d51-5b7cff65bd7c.pdf'))">
+      <SourceType>Package</SourceType>
+      <SourceId>StageursApp</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/StageursApp</BasePath>
+      <RelativePath>uploads/badges/badge_8_b5894301-7de9-43ce-9d51-5b7cff65bd7c.pdf</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>9v5785mjzw</Fingerprint>
+      <Integrity>dXXkYAtf6BNR71MLKnLjiJAtOk1KZSYw58C0X7JDVPI=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\badges\badge_8_b5894301-7de9-43ce-9d51-5b7cff65bd7c.pdf'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\badges\badge_8_eb3e7514-a4c4-416b-ac4f-35ccc915b1dc.pdf'))">
+      <SourceType>Package</SourceType>
+      <SourceId>StageursApp</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/StageursApp</BasePath>
+      <RelativePath>uploads/badges/badge_8_eb3e7514-a4c4-416b-ac4f-35ccc915b1dc.pdf</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>1etrds46o8</Fingerprint>
+      <Integrity>iaq0amQ8Iz1qYgCXqt6KMxkJvN5uo2tK8Bpu+WmP9kU=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\badges\badge_8_eb3e7514-a4c4-416b-ac4f-35ccc915b1dc.pdf'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\photos\.gitkeep'))">
       <SourceType>Package</SourceType>
@@ -1188,12 +1242,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\photos\.gitkeep'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\photos\2ac9e57d-06cb-4d2e-965a-bdd9891b715a.jpg'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\photos\72c62466-33ff-40da-86de-2995beaa049b.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>StageursApp</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/StageursApp</BasePath>
-      <RelativePath>uploads/photos/2ac9e57d-06cb-4d2e-965a-bdd9891b715a.jpg</RelativePath>
+      <RelativePath>uploads/photos/72c62466-33ff-40da-86de-2995beaa049b.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -1204,7 +1258,25 @@
       <Integrity>L2JyEP20qn/LD+cQAq6Zssjxl0J/7+tr05xQ9QP1CNI=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\photos\2ac9e57d-06cb-4d2e-965a-bdd9891b715a.jpg'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\photos\72c62466-33ff-40da-86de-2995beaa049b.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\photos\831e5a1b-701d-4e1c-a0ad-3c9c5ca871f5.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>StageursApp</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/StageursApp</BasePath>
+      <RelativePath>uploads/photos/831e5a1b-701d-4e1c-a0ad-3c9c5ca871f5.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>yletlsalgz</Fingerprint>
+      <Integrity>ygtJFGVa4ofzIRvB29Q4zPLeEDOQuUMHp31qnl+ViCk=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\photos\831e5a1b-701d-4e1c-a0ad-3c9c5ca871f5.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

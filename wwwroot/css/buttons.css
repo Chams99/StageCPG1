@@ -1,0 +1,195 @@
+/* Button Consistency Styles */
+
+/* Standard button sizes */
+.btn {
+  min-width: 120px;
+  height: 38px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Small buttons */
+.btn-sm {
+  min-width: 100px;
+  height: 32px;
+  font-size: 0.8rem;
+  padding: 0.25rem 0.75rem;
+}
+
+/* Large buttons */
+.btn-lg {
+  min-width: 140px;
+  height: 44px;
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+}
+
+/* Extra large buttons */
+.btn-xl {
+  min-width: 160px;
+  height: 48px;
+  font-size: 1.1rem;
+  padding: 0.875rem 1.75rem;
+}
+
+/* Action buttons (Save, Create, Edit, Delete) */
+.btn-primary,
+.btn-info,
+.btn-success,
+.btn-warning,
+.btn-danger {
+  min-width: 130px;
+  height: 40px;
+  font-weight: 600;
+}
+
+/* Navigation buttons (Back, Cancel, etc.) */
+.btn-secondary,
+.btn-outline-secondary {
+  min-width: 110px;
+  height: 38px;
+}
+
+/* Form action buttons */
+.btn-group .btn {
+  min-width: 100px;
+  height: 36px;
+}
+
+/* Card action buttons */
+.card-footer .btn {
+  min-width: 120px;
+  height: 38px;
+}
+
+/* Table action buttons */
+.table .btn {
+  min-width: 32px;
+  height: 32px;
+  padding: 0.25rem;
+  font-size: 0.75rem;
+}
+
+/* Full width buttons */
+.btn.w-100 {
+  min-width: 100%;
+  width: 100%;
+}
+
+/* Button groups */
+.btn-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-group .btn {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Responsive button sizing */
+@media (max-width: 768px) {
+  .btn {
+    min-width: 100px;
+    height: 36px;
+    font-size: 0.8rem;
+  }
+  
+  .btn-sm {
+    min-width: 80px;
+    height: 28px;
+    font-size: 0.75rem;
+  }
+  
+  .btn-lg {
+    min-width: 120px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+  
+  .btn-xl {
+    min-width: 140px;
+    height: 44px;
+    font-size: 1rem;
+  }
+  
+  /* Stack buttons vertically on mobile */
+  .btn-group {
+    flex-direction: column;
+  }
+  
+  .btn-group .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  .btn-group .btn:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Button hover effects */
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Button focus states */
+.btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Disabled button states */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Icon spacing in buttons */
+.btn i {
+  margin-right: 0.25rem;
+}
+
+/* Button with icons only */
+.btn-icon {
+  min-width: 40px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon.btn-sm {
+  min-width: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.btn-icon.btn-lg {
+  min-width: 48px;
+  width: 48px;
+  height: 48px;
+}
+
+/* Consistent spacing for button containers */
+.d-flex.justify-content-between .btn {
+  margin: 0 0.25rem;
+}
+
+.d-flex.justify-content-between .btn:first-child {
+  margin-left: 0;
+}
+
+.d-flex.justify-content-between .btn:last-child {
+  margin-right: 0;
+} 

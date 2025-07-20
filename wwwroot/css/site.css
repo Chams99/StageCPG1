@@ -18,7 +18,7 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  /* Removed margin-bottom to prevent footer blocking content */
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -130,8 +130,8 @@ body {
 .footer {
   background-color: #f8f9fa;
   border-top: 1px solid #dee2e6;
-  padding: 1.5rem 0;
-  margin-top: 3rem;
+  padding: 0.75rem 0;
+  /* Removed margin-top to prevent spacing issues */
 }
 
 /* Gradient backgrounds */
@@ -148,4 +148,89 @@ body {
 .card:hover .fas {
   transform: scale(1.1);
   transition: transform 0.3s ease;
+}
+
+/* Ensure proper spacing for long content */
+main {
+  min-height: calc(100vh - 200px); /* Account for header and footer */
+}
+
+/* Ensure footer doesn't overlap content */
+.footer {
+  position: relative;
+  z-index: 1000;
+}
+
+/* Add some bottom padding to main content to prevent footer overlap */
+.container {
+  padding-bottom: 8rem;
+}
+
+/* Ensure form buttons are not blocked by footer */
+.card-body {
+  padding-bottom: 3rem;
+}
+
+/* Extra spacing for forms with buttons at bottom */
+form {
+  margin-bottom: 3rem;
+}
+
+/* Ensure action buttons are properly spaced */
+.btn-group, .d-flex.justify-content-between {
+  margin-bottom: 2rem;
+}
+
+/* Ensure the last row of buttons has extra space */
+.row:last-child {
+  margin-bottom: 3rem;
+}
+
+/* Dashboard scrollable lists */
+.dashboard-list {
+  max-height: 300px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #dee2e6 #f8f9fa;
+}
+
+.dashboard-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dashboard-list::-webkit-scrollbar-track {
+  background: #f8f9fa;
+  border-radius: 3px;
+}
+
+.dashboard-list::-webkit-scrollbar-thumb {
+  background: #dee2e6;
+  border-radius: 3px;
+}
+
+.dashboard-list::-webkit-scrollbar-thumb:hover {
+  background: #adb5bd;
+}
+
+/* Ensure proper spacing on mobile */
+@media (max-width: 768px) {
+  main {
+    min-height: calc(100vh - 150px);
+  }
+  
+  .container {
+    padding-bottom: 6rem;
+  }
+  
+  .card-body {
+    padding-bottom: 2rem;
+  }
+  
+  .row:last-child {
+    margin-bottom: 2rem;
+  }
+  
+  .dashboard-list {
+    max-height: 250px;
+  }
 }

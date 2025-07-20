@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\StageursApp.60rq5u2h94.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Jecft\\Desktop\\Projects\\Stage\\StageursApp\\wwwroot\\css\\buttons.css",
+      "PackagePath": "staticwebassets\\css\\buttons.css"
+    },
+    {
       "Id": "C:\\Users\\Jecft\\Desktop\\Projects\\Stage\\StageursApp\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -257,16 +261,28 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.map"
     },
     {
-      "Id": "C:\\Users\\Jecft\\Desktop\\Projects\\Stage\\StageursApp\\wwwroot\\uploads\\badges\\badge_1_05076883-cace-4eae-a5c2-8466060499f0.pdf",
-      "PackagePath": "staticwebassets\\uploads\\badges\\badge_1_05076883-cace-4eae-a5c2-8466060499f0.pdf"
+      "Id": "C:\\Users\\Jecft\\Desktop\\Projects\\Stage\\StageursApp\\wwwroot\\uploads\\badges\\badge_7_545d8f77-3299-4f64-8075-d2776cf059be.pdf",
+      "PackagePath": "staticwebassets\\uploads\\badges\\badge_7_545d8f77-3299-4f64-8075-d2776cf059be.pdf"
+    },
+    {
+      "Id": "C:\\Users\\Jecft\\Desktop\\Projects\\Stage\\StageursApp\\wwwroot\\uploads\\badges\\badge_8_b5894301-7de9-43ce-9d51-5b7cff65bd7c.pdf",
+      "PackagePath": "staticwebassets\\uploads\\badges\\badge_8_b5894301-7de9-43ce-9d51-5b7cff65bd7c.pdf"
+    },
+    {
+      "Id": "C:\\Users\\Jecft\\Desktop\\Projects\\Stage\\StageursApp\\wwwroot\\uploads\\badges\\badge_8_eb3e7514-a4c4-416b-ac4f-35ccc915b1dc.pdf",
+      "PackagePath": "staticwebassets\\uploads\\badges\\badge_8_eb3e7514-a4c4-416b-ac4f-35ccc915b1dc.pdf"
     },
     {
       "Id": "C:\\Users\\Jecft\\Desktop\\Projects\\Stage\\StageursApp\\wwwroot\\uploads\\photos\\.gitkeep",
       "PackagePath": "staticwebassets\\uploads\\photos\\.gitkeep"
     },
     {
-      "Id": "C:\\Users\\Jecft\\Desktop\\Projects\\Stage\\StageursApp\\wwwroot\\uploads\\photos\\2ac9e57d-06cb-4d2e-965a-bdd9891b715a.jpg",
-      "PackagePath": "staticwebassets\\uploads\\photos\\2ac9e57d-06cb-4d2e-965a-bdd9891b715a.jpg"
+      "Id": "C:\\Users\\Jecft\\Desktop\\Projects\\Stage\\StageursApp\\wwwroot\\uploads\\photos\\72c62466-33ff-40da-86de-2995beaa049b.jpg",
+      "PackagePath": "staticwebassets\\uploads\\photos\\72c62466-33ff-40da-86de-2995beaa049b.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Jecft\\Desktop\\Projects\\Stage\\StageursApp\\wwwroot\\uploads\\photos\\831e5a1b-701d-4e1c-a0ad-3c9c5ca871f5.jpg",
+      "PackagePath": "staticwebassets\\uploads\\photos\\831e5a1b-701d-4e1c-a0ad-3c9c5ca871f5.jpg"
     },
     {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.StageursApp.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

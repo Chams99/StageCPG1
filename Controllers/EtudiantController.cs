@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using StageursApp.Data;
 using StageursApp.Models;
 using StageursApp.Services;
+using System.Linq;
 
 namespace StageursApp.Controllers
 {
@@ -17,6 +19,7 @@ namespace StageursApp.Controllers
             _badgeService = badgeService;
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewBag.Encadreurs = _context.Encadreurs.ToList();
@@ -25,17 +28,25 @@ namespace StageursApp.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(Etudiant etudiant)
         {
+            if (_context.Etudiants.Any(e => e.IdentificationCardNumber == etudiant.IdentificationCardNumber))
+            {
+                ModelState.AddModelError("IdentificationCardNumber", "A student with this national ID card number already exists.");
+                ViewBag.Encadreurs = _context.Encadreurs.ToList();
+                ViewBag.Sections = _context.Sections.Include(s => s.Faculty).ToList();
+                return View(etudiant);
+            }
             if (ModelState.IsValid)
             {
                 // Handle photo upload
                 if (etudiant.PhotoFile != null)
                 {
-                    // Validate file size (max 5MB)
-                    if (etudiant.PhotoFile.Length > 5 * 1024 * 1024)
+                    // Validate file size (max 1MB)
+                    if (etudiant.PhotoFile.Length > 1 * 1024 * 1024)
                     {
-                        ModelState.AddModelError("PhotoFile", "Photo size must be less than 5MB");
+                        ModelState.AddModelError("PhotoFile", "Photo size must be less than 1MB");
                         ViewBag.Encadreurs = _context.Encadreurs.ToList();
                         ViewBag.Sections = _context.Sections.Include(s => s.Faculty).ToList();
                         return View(etudiant);
@@ -76,12 +87,22 @@ namespace StageursApp.Controllers
                 _context.Etudiants.Add(etudiant);
                 await _context.SaveChangesAsync();
 
+                // Reload the student with related data for badge generation
+                var studentWithRelations = await _context.Etudiants
+                    .Include(e => e.Encadreur)
+                    .Include(e => e.Section)
+                    .ThenInclude(s => s.Faculty)
+                    .FirstOrDefaultAsync(e => e.Id == etudiant.Id);
+
                 // Generate badge automatically after student is created
                 try
                 {
-                    etudiant.BadgePath = await _badgeService.GenerateBadgeAsync(etudiant);
-                    _context.Update(etudiant);
-                    await _context.SaveChangesAsync();
+                    if (studentWithRelations != null)
+                    {
+                        studentWithRelations.BadgePath = await _badgeService.GenerateBadgeAsync(studentWithRelations);
+                        _context.Update(studentWithRelations);
+                        await _context.SaveChangesAsync();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -109,6 +130,7 @@ namespace StageursApp.Controllers
         }
 
         // GET: Etudiant/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -130,11 +152,22 @@ namespace StageursApp.Controllers
         // POST: Etudiant/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, Etudiant etudiant)
         {
             if (id != etudiant.Id)
             {
                 return NotFound();
+            }
+
+            // Debug logging
+            if (etudiant.PhotoFile != null)
+            {
+                Console.WriteLine($"Photo file received: {etudiant.PhotoFile.FileName}, Size: {etudiant.PhotoFile.Length}");
+            }
+            else
+            {
+                Console.WriteLine("No photo file received");
             }
 
             if (ModelState.IsValid)
@@ -144,10 +177,10 @@ namespace StageursApp.Controllers
                     // Handle photo upload
                     if (etudiant.PhotoFile != null)
                     {
-                        // Validate file size (max 5MB)
-                        if (etudiant.PhotoFile.Length > 5 * 1024 * 1024)
+                        // Validate file size (max 1MB)
+                        if (etudiant.PhotoFile.Length > 1 * 1024 * 1024)
                         {
-                            ModelState.AddModelError("PhotoFile", "Photo size must be less than 5MB");
+                            ModelState.AddModelError("PhotoFile", "Photo size must be less than 1MB");
                             ViewBag.Encadreurs = _context.Encadreurs.ToList();
                             ViewBag.Sections = _context.Sections.Include(s => s.Faculty).ToList();
                             return View(etudiant);
@@ -195,17 +228,31 @@ namespace StageursApp.Controllers
                         etudiant.PhotoPath = "/uploads/photos/" + fileName;
                     }
 
-                    // Delete old badge if exists
-                    if (!string.IsNullOrEmpty(etudiant.BadgePath))
-                    {
-                        await _badgeService.DeleteBadgeAsync(etudiant.BadgePath);
-                    }
-
-                    // Generate new badge
-                    etudiant.BadgePath = await _badgeService.GenerateBadgeAsync(etudiant);
-                    
+                    // Update the student in the database
                     _context.Update(etudiant);
                     await _context.SaveChangesAsync();
+
+                    // Reload the student with related data for badge generation
+                    var studentWithRelations = await _context.Etudiants
+                        .Include(e => e.Encadreur)
+                        .Include(e => e.Section)
+                        .ThenInclude(s => s.Faculty)
+                        .FirstOrDefaultAsync(e => e.Id == id);
+
+                    if (studentWithRelations != null)
+                    {
+                        // Delete old badge if exists
+                        if (!string.IsNullOrEmpty(studentWithRelations.BadgePath))
+                        {
+                            await _badgeService.DeleteBadgeAsync(studentWithRelations.BadgePath);
+                        }
+
+                        // Generate new badge
+                        studentWithRelations.BadgePath = await _badgeService.GenerateBadgeAsync(studentWithRelations);
+                        
+                        _context.Update(studentWithRelations);
+                        await _context.SaveChangesAsync();
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -221,12 +268,23 @@ namespace StageursApp.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            // Debug logging for validation errors
+            if (!ModelState.IsValid)
+            {
+                Console.WriteLine("Model validation failed:");
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    Console.WriteLine($"- {error.ErrorMessage}");
+                }
+            }
+
             ViewBag.Encadreurs = _context.Encadreurs.ToList();
             ViewBag.Sections = _context.Sections.Include(s => s.Faculty).ToList();
             return View(etudiant);
         }
 
         // GET: Etudiant/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -251,6 +309,7 @@ namespace StageursApp.Controllers
         // POST: Etudiant/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var etudiant = await _context.Etudiants.FindAsync(id);
@@ -336,7 +395,7 @@ namespace StageursApp.Controllers
                     return NotFound();
                 }
 
-                return File(pdfBytes, "application/pdf", $"badge_{etudiant.Prenom}_{etudiant.Nom}.pdf");
+                return File(pdfBytes, "application/pdf", $"badge_{etudiant.Prenom ?? "Unknown"}_{etudiant.Nom ?? "Student"}.pdf");
             }
             catch (IOException ex) when (ex.Message.Contains("being used by another process"))
             {
@@ -434,6 +493,7 @@ namespace StageursApp.Controllers
         // POST: Etudiant/RegenerateBadge/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> RegenerateBadge(int id)
         {
             var etudiant = await _context.Etudiants
