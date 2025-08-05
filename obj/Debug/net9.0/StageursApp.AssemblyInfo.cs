@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StageursApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b061eeaa36ba4c92772eb0b64b914b63ce3d7a05")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d9e4185c5c10bd6cb3db7f4b2b8431dde29cfc1b")]
 [assembly: System.Reflection.AssemblyProductAttribute("StageursApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StageursApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
